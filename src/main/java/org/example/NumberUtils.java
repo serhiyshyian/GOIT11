@@ -1,18 +1,16 @@
 package org.example;
 
+
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class NumberUtils {
     public static String extractAndSortNumbers(String[] inputArray) {
-        List<Integer> numbers = Arrays.stream(inputArray)
-                .flatMap(s -> Arrays.stream(s.split(", ")))
+        return Arrays.stream(inputArray)
+                .flatMap(s -> Arrays.stream(s.split(",\\s*")))
                 .map(Integer::parseInt)
                 .sorted()
-                .collect(Collectors.toList());
-        return numbers.stream()
-                .map(Object::toString)
+                .map(String::valueOf)
                 .collect(Collectors.joining(", "));
     }
 
@@ -22,4 +20,5 @@ public class NumberUtils {
         System.out.println(result); // Output: "0, 1, 2, 4, 5"
     }
 }
+
 
